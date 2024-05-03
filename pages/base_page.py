@@ -2,12 +2,19 @@
 import allure
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+import time
 
 
 class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
+
+    def wait(self, timeout=10):
+        return WebDriverWait(self.driver, timeout)
+
+    def wait_for_seconds(self, seconds):
+        time.sleep(seconds)
 
     @allure.step('Кликаем на элемент')
     def click_to_element(self, element):
@@ -31,4 +38,12 @@ class BasePage:
     def get_text_element(self, locator):
         return self.driver.find_element(*locator).text
 
+    @allure.step('Получаем текущий url')
+    def get_current_url(self):
+        return self.driver.current_url
+
+    @allure.step('Переключаем драйвер на новую вкладку')
+    def swith_to_new_tab(self):
+        self.wait(10).until(expected_conditions.number_of_windows_to_be(2))
+        self.driver.switch_to.window(self.driver.window_handles[1])
 

@@ -15,7 +15,7 @@ class TestOrder:
         order_page = OrderPage(driver)
         main_page.click_header_order_button()
         order_page.set_data_order(name, surname, address, phone)
-        order_page.check_and_lick_check_button_next()
+        order_page.check_and_сlick_button_next()
         order_page.set_data_order_about_rent()
         order_page.check_visibility_of_button_status()
         text_in_button = order_page.get_text_on_the_button_status()

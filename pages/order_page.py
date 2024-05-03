@@ -113,6 +113,6 @@ class OrderPage(BasePage):
         self.click_button_yes()
 
     @allure.step('Проверяем кликабельность кнопки далее и кликаем"')
-    def check_and_lick_check_button_next(self):
+    def check_and_сlick_button_next(self):
         self.check_button_next()
         self.click_next()

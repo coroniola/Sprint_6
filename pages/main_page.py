@@ -1,7 +1,5 @@
-from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 import allure
 
@@ -24,7 +22,8 @@ class MainPage(BasePage):
     def get_answer(self, number):
         method, locator = MainPageLocators.ANSWER_LOC
         locator = locator.format(number)
-        return self.driver.find_element(method, locator).text
+        element = self.find_element((method, locator))
+        return element.text
 
     @allure.step('Кликаем на кнопку заказа в шапке сайта')
     def click_header_order_button(self):
@@ -44,11 +43,8 @@ class MainPage(BasePage):
 
     @allure.step('Нажимаем на кнопку "заказать" в конце страницы')
     def click_body_ordering_button(self):
-        self.driver.find_element(MainPageLocators.BODY_ORDER_BUTTON).click()
+        self.click_to_element(MainPageLocators.BODY_ORDER_BUTTON)
 
-    @allure.step('Получаем текущий url')
-    def get_current_url(self):
-        return self.driver.current_url
 
     @allure.step('Кликаем по логотипу самоката')
     def click_scooter_logo(self):
@@ -58,7 +54,3 @@ class MainPage(BasePage):
     def click_to_yandex_logo(self):
         self.click_to_element(GeneralLocators.LOGO_YANDEX)
 
-    @allure.step('Переключаем драйвер на новую вкладку')
-    def swith_to_new_tab(self):
-        WebDriverWait(self.driver, 10).until(expected_conditions.number_of_windows_to_be(2))
-        self.driver.switch_to.window(self.driver.window_handles[1])

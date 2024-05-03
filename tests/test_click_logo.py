@@ -1,6 +1,7 @@
 import allure
 from pages.main_page import MainPage
-import time
+from settings import Urls
+
 
 
 class TestClickLogo:
@@ -12,7 +13,7 @@ class TestClickLogo:
         main_page.click_header_order_button()
         main_page.click_scooter_logo()
         current_url = main_page.get_current_url()
-        assert "https://qa-scooter.praktikum-services.ru/" in current_url
+        assert Urls.start_page in current_url
 
 
     @allure.title('Проверяем переход на Дзен при клике на логотип Yandex')
@@ -20,7 +21,7 @@ class TestClickLogo:
         main_page = MainPage(driver)
         main_page.click_to_yandex_logo()
         main_page.swith_to_new_tab()
-        time.sleep(10)
+        main_page.wait_for_seconds(4)
         current_url = main_page.get_current_url()
-        assert "https://dzen.ru/" in current_url
+        assert Urls.dzen_url in current_url
 
