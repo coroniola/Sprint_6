@@ -13,8 +13,6 @@ class BasePage:
     def wait(self, timeout=10):
         return WebDriverWait(self.driver, timeout)
 
-    def wait_for_seconds(self, seconds):
-        time.sleep(seconds)
 
     @allure.step('Кликаем на элемент')
     def click_to_element(self, element):
