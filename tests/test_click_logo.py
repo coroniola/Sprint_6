@@ -22,8 +22,7 @@ class TestClickLogo:
         main_page = MainPage(driver)
         main_page.click_to_yandex_logo()
         main_page.swith_to_new_tab()
-        wait = main_page.wait()
-        wait.until(expected_conditions.url_contains(Urls.dzen_url))
+        MainPage(driver).wait().until(expected_conditions.url_contains(Urls.dzen_url))
         current_url = main_page.get_current_url()
         assert Urls.dzen_url in current_url
 
