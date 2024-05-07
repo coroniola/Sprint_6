@@ -1,7 +1,7 @@
 import allure
 from pages.main_page import MainPage
 from settings import Urls
-from selenium.webdriver.support import expected_conditions
+
 
 
 
@@ -22,7 +22,5 @@ class TestClickLogo:
         main_page = MainPage(driver)
         main_page.click_to_yandex_logo()
         main_page.swith_to_new_tab()
-        MainPage(driver).wait().until(expected_conditions.url_contains(Urls.dzen_url))
-        current_url = main_page.get_current_url()
-        assert Urls.dzen_url in current_url
-
+        main_page.wait_for_load_url(Urls.dzen_url)
+        assert Urls.dzen_url in main_page.get_current_url()

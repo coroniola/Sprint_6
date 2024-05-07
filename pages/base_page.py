@@ -2,7 +2,7 @@
 import allure
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-import time
+
 
 
 class BasePage:
@@ -44,4 +44,8 @@ class BasePage:
     def swith_to_new_tab(self):
         self.wait(10).until(expected_conditions.number_of_windows_to_be(2))
         self.driver.switch_to.window(self.driver.window_handles[1])
+
+    @allure.step('Ожидаем загрузку url')
+    def wait_for_load_url(self, expected_url):
+        WebDriverWait(self.driver, 5).until(expected_conditions.url_to_be(expected_url))
 
